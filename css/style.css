@@ -224,6 +224,7 @@ header {
     box-sizing: border-box;
     width: 300vw;
     transform: translate(-800px);
+    transition: transform 0.5s;
   }
 
   .slik-list {
@@ -272,42 +273,71 @@ header {
   }
 
   .information {
-    text-align: center;
+    position: absolute;
+    bottom: 28px;
+    width: 330px;
+    height: 160px;
+    border-radius: 4px;
+    background-color: #fff;
+    opacity: 0;
+    text-align: left;
+    left: 34px;
+    opacity: 1;
   }
 
   .information > h2 {
     margin-top: 20px;
     font-size: 18px;
+    line-height: 1;
     font-weight: 700;
     color: #333;
     width: "auto";
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 20px;
+    line-height: 1.5;
   }
 
   .information > h3 {
-    margin-top: 6px;
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.15;
-    color: #666;
-    width: "auto";
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    margin: 0 20px;
+    height: 44px;
+    font-size: 14px;
+    line-height: 1.64;
+    color: #333;
+  }
+
+  .divider {
+    height: 1px;
+    margin: 0;
+    border: none;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    background-color: #ececec;
+    box-sizing: content-box;
   }
 
   .information_directButton {
+    margin: 6px 0 0 13px;
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
     color: #36f;
+    height: 40px;
+    display: inline-flex;
   }
-
+  .Button__sizeMedium {
+    height: 40px;
+    font-size: 15px;
+  }
   .Btn_label {
     display: inherit;
-    height: 40px;
+    align-items: center;
+    justify-content: center;
   }
 
   .Btn_label > span > svg {
