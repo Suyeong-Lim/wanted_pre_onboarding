@@ -50,7 +50,7 @@ body {
   color: #222;
 }
 
-/*  ####### Header #######  */
+/*  #####################  Header #####################   */
 header {
   position: fixed;
   padding-right: initial;
@@ -168,12 +168,7 @@ header {
 .notificationAlarm span {
   position: absolute;
 }
-/* .profileButton > span {
-  top: -4px;
-  left: 24px;
-  position: absolute;
-  padding: 0 !important;
-} */
+
 .Badge {
   display: inline-flex;
   align-items: center;
@@ -205,4 +200,135 @@ header {
   margin-left: 5px;
 }
 
-/*  ####### carousel #######  */
+.padding {
+  height: 50px;
+}
+/*  ##################### Main carousel #####################  */
+
+main {
+  display: block;
+  padding-top: 25px;
+}
+
+.topBanner {
+  position: relative;
+  overflow: hidden;
+  height: auto;
+}
+
+.slik-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 300vw;
+  transform: translate(20vw);
+}
+
+.slik-list {
+  padding: 0px 40px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+}
+.slik-slide {
+  width: 1060px;
+  position: relative;
+  display: block;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+}
+.slik-slide > div {
+  margin: 20px 10px;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px 3px 0 0;
+}
+
+.image > img {
+  display: inline-block;
+}
+.image_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.information {
+  text-align: center;
+}
+
+.information > h2 {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  width: "auto";
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.information > h3 {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: #666;
+  width: "auto";
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.information_directButton {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #36f;
+}
+
+.Btn_label {
+  display: inherit;
+  height: 40px;
+}
+
+.Btn_label > span > svg {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  font-size: inherit;
+}
+
+.next-arrowBtn {
+  right: calc((100% - 1200px) / 2);
+}
+
+.prev-arrowBtn {
+  left: calc((100% - 1210px) / 2);
+}
+
+.topBanner-arrow {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 120px;
+  width: 30px;
+  height: 60px;
+  opacity: 0.5;
+  border-radius: 15px;
+  background-color: rgb(240, 59, 59);
+  font-size: 16px;
+}
