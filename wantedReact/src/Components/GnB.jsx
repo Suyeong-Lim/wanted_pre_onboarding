@@ -14,7 +14,7 @@ const GnB = () => {
 
 const GnBConainer = styled.div`
   margin-left: 60px;
-  margin-right: 30px;
+  margin-right: 60px;
   text-align: center;
   display: flex;
   justify-content: space-evenly;

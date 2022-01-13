@@ -6,14 +6,16 @@ import GlobalStyle from "./Components/GlobalStyle";
 
 import Header from "./Components/Header";
 import Padding from "./Components/Padding";
+import TopBanner from "./Components/TopBanner";
 
 function App() {
   return (
-    <div>
+    <>
       <GlobalStyle />
       <Header />
       <Padding />
-    </div>
+      <TopBanner />
+    </>
   );
 }
 

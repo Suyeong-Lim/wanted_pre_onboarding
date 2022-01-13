@@ -67,6 +67,7 @@ const ProfileBox = styled.li`
   display: inline-flex;
   flex-direction: row;
   margin-left: -15px;
+  margin-right: 5px;
 `;
 const ProfileButton = styled.button`
   position: relative;
@@ -116,6 +117,6 @@ const DashBoardBtn = styled.a`
   border-radius: 15px;
   padding: 0 10px;
   font-weight: 400;
-  margin-left: 5px;
+  margin-left: 15px;
 `;
 export default Aside;
