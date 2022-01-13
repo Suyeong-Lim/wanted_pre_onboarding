@@ -1,65 +1,97 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import styled from "styled-components";
 import { CarouselData } from "./data/CarouselData";
 
+// @Todo : 인피니트 캐러셀 자연스럽게 
+
 function TopBanner() {
-  const [centerStyle, setCenterStyle] = useState(null);
-  const [cursor, setCursor] = useState(0);
   const newCarouselData = [...CarouselData];
-  const count = newCarouselData.length; //데이터 개수
-  const SlideListRef = useRef();
+  const [stateCarousel, setStateCarousel] = useState(newCarouselData); //앞뒤 엘레멘트 클론용
+  const carouselcount = stateCarousel.length; //데이터 개수
+
+  const [current, setCurrent] = useState(1);
   const [translateX, setTranslateX] = useState(0);
 
-  useLayoutEffect(() => {
-    const browserWidth = window.innerWidth;
+  const SlideListRef = useRef();
 
-    setCenterStyle({
-      transform: `translateX(-${1060 - (browserWidth - 1060) / 2}px)`,
-    });
-  }, []);
-
+  //앞,뒤 캐러셀이미지 복사
   useEffect(() => {
-    console.log(SlideListRef.current.clientWidth);
-    console.log(window.innerWidth);
-    console.log(SlideListRef.current.clientWidth * cursor);
+    //앞,뒤 엘레멘트 복사 후 캐러셀 state에 저장
+    const carouselWithClones = [...newCarouselData];
+    carouselWithClones.unshift(
+      carouselWithClones[carouselWithClones.length - 1]
+    );
+    carouselWithClones.push(carouselWithClones[1]);
+    setStateCarousel(carouselWithClones);
   }, []);
 
-  const chageCursorNext = () => {
-    if (cursor >= count) {
-      setCursor(1);
-    } else {
-      setCursor((prev) => ++prev);
-    }
-    test();
-    console.log(cursor);
-  };
+  //첫 렌더링 시 위치 조정
+  useLayoutEffect(() => {
+    console.log(SlideListRef.current.clientWidth);
 
-  const chageCursorPrev = () => {
-    console.log(cursor);
-    //현재 화면보다 이미지 개수의 숫자가 적으면
-    //커서가 크면, 다시
-    //현재 이미지 총 개수보다 커서가 크면 => 커서를 0 으로 돌리기. 다시 원위치로 돌아감
-    //만약 커서보다 숫자가 -1로 되면 현재 슬라이드 위치를 이미지 개수보다 1작은걸로..(마지막 이미지로)
-    //transitionEnd 가 끝날때 이 작업을 해줘야 인피니트처럼 구현가능.
-    if (cursor <= 1) {
-    }
-    test();
-  };
+    setTranslateX(SlideListRef.current.clientWidth * current + 1524 / 2);
+  }, []);
 
-  const test = () => {
-    setCenterStyle({
-      width: "42009px",
-      transition: ".5s ease",
-      transform: `translateX(${count + cursor * 1060 * 1.4}px)`,
-    });
-  };
+  const ClickHandler = useCallback((mode) => {
+    if (mode === "prev") {
+      console.log(current);
+      if (current < 1) {
+        //prev값이 음수가 되려고 하면
+        setTranslateX(SlideListRef.current.clientWidth * current + 1524 / 2);
+        setCurrent(carouselcount - 2); //마지막 13 번째 캐러셀 이미지로
+      } else {
+        setTranslateX(SlideListRef.current.clientWidth * current + 1524 / 2);
+        setCurrent((old) => --old);
+      }
+    } else if (mode === "next") {
+      if (current >= carouselcount - 2) {
+        //next 횟수가 캐러셀 길이보다 커지면
+        setTranslateX(SlideListRef.current.clientWidth * current + 1524 / 2);
+        setCurrent(1);
+      } else {
+        //next 실행
+        setCurrent((old) => ++old);
+        setTranslateX(SlideListRef.current.clientWidth * current + 1524 / 2);
+      }
+    }
+  });
+
+  //인피니트 캐러셀을 자연스럽게만들기
+  useEffect(() => {
+    const transitionEnd = () => {
+      if (current >= CarouselData.length - 1) {
+      }
+      if (current <= 1) {
+        SlideListRef.current.style.trasition = "none";
+      }
+    };
+    //트랜지션 멈췄다가 다시 시작하게하기? 이미지가 마지막에 도달했으면 현재 슬라이드 맨처음으로 돌리고 이미지 갯수보다 넘어가면
+    //마지막 으로 돌아가게끔.
+    document.addEventListener("transitionend", transitionEnd);
+
+    return () => {
+      document.removeEventListener("transitionend", transitionEnd);
+    };
+  }, [current, translateX]);
 
   return (
     <Main>
       <TopBannerWrapper>
-        <SlderTrack style={centerStyle}>
+        <SlderTrack
+          style={{
+            width: "42009px",
+            transition: ".5s ease",
+            transform: `translateX(${-translateX}px)`,
+          }}
+        >
           <SlidesContainer>
-            {newCarouselData.map((slider, id) => {
+            {stateCarousel.map((slider, id) => {
               return (
                 <TestDiv ref={SlideListRef}>
                   <TestImg src={slider.img} key={id}></TestImg>
@@ -68,8 +100,8 @@ function TopBanner() {
             })}
           </SlidesContainer>
         </SlderTrack>
-        <TopBannerBtn onClick={chageCursorNext}>next</TopBannerBtn>
-        <TopBannerBtn onClick={chageCursorPrev}>prev</TopBannerBtn>
+        <TopBannerBtn onClick={() => ClickHandler("next")}>next</TopBannerBtn>
+        <TopBannerBtn onClick={() => ClickHandler("prev")}>prev</TopBannerBtn>
       </TopBannerWrapper>
     </Main>
   );
