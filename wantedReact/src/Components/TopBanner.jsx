@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
 import styled from "styled-components";
-import SlideList from "./SlideList";
 import { CarouselData } from "./data/CarouselData";
 
 function TopBanner() {
@@ -8,7 +7,7 @@ function TopBanner() {
   const [cursor, setCursor] = useState(0);
   const newCarouselData = [...CarouselData];
   const count = newCarouselData.length; //데이터 개수
-  const SlideList = useRef();
+  const SlideListRef = useRef();
   const [translateX, setTranslateX] = useState(0);
 
   useLayoutEffect(() => {
@@ -20,8 +19,9 @@ function TopBanner() {
   }, []);
 
   useEffect(() => {
-    console.log("?");
-    console.log(SlideList.current);
+    console.log(SlideListRef.current.clientWidth);
+    console.log(window.innerWidth);
+    console.log(SlideListRef.current.clientWidth * cursor);
   }, []);
 
   const chageCursorNext = () => {
@@ -36,8 +36,12 @@ function TopBanner() {
 
   const chageCursorPrev = () => {
     console.log(cursor);
+    //현재 화면보다 이미지 개수의 숫자가 적으면
+    //커서가 크면, 다시
+    //현재 이미지 총 개수보다 커서가 크면 => 커서를 0 으로 돌리기. 다시 원위치로 돌아감
+    //만약 커서보다 숫자가 -1로 되면 현재 슬라이드 위치를 이미지 개수보다 1작은걸로..(마지막 이미지로)
+    //transitionEnd 가 끝날때 이 작업을 해줘야 인피니트처럼 구현가능.
     if (cursor <= 1) {
-      setCursor(count);
     }
     test();
   };
@@ -57,7 +61,7 @@ function TopBanner() {
           <SlidesContainer>
             {newCarouselData.map((slider, id) => {
               return (
-                <TestDiv ref={SlideList} style={{ width: 1060 }}>
+                <TestDiv ref={SlideListRef}>
                   <TestImg src={slider.img} key={id}></TestImg>
                 </TestDiv>
               );
@@ -89,7 +93,7 @@ const Main = styled.main`
 
 const TopBannerWrapper = styled.div`
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: pink;
 `;
 
