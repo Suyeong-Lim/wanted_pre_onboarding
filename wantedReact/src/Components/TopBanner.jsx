@@ -1,12 +1,8 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useCallback,
-} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { CarouselData } from "./data/CarouselData";
+import nextBtn from "../img/nextBtn.svg";
+import prevBtn from "../img/prevBtn.svg";
 
 function TopBanner() {
   const newCarouselData = [...CarouselData];
@@ -21,22 +17,20 @@ function TopBanner() {
 
   const translateX = cardWidth * current - leftMargin;
 
+  const [active, setActive] = useState(false);
+
   //앞,뒤 캐러셀이미지 복사
   useEffect(() => {
-    //앞,뒤 엘레멘트 복사 후 캐러셀 state에 저장
     const carouselWithClones = [...newCarouselData];
     carouselWithClones.unshift(
       carouselWithClones[carouselWithClones.length - 1]
     );
-
     carouselWithClones.push(carouselWithClones[1]);
-
     setStateCarousel(carouselWithClones);
   }, []);
 
   const ClickHandler = useCallback((mode) => {
     if (mode === "prev") {
-      console.log(current);
       if (current <= 1) {
         //prev값이 음수가 되려고 하면
         setCurrent(carouselcount - 2); //마지막 13 번째 캐러셀 이미지로
@@ -54,10 +48,6 @@ function TopBanner() {
     }
   });
 
-  console.log("current", current);
-
-  console.log("carouselcount", carouselcount);
-
   return (
     <Main>
       <TopBannerWrapper>
@@ -74,30 +64,108 @@ function TopBanner() {
           <SlidesContainer>
             {stateCarousel.map((slider, id) => {
               return (
-                <SlideItem>
+                <SlideItem isActive={id === current ? active : !active}>
                   <SlideImg src={slider.img} key={id}></SlideImg>
+                  <Information isActive={id === current ? active : !active}>
+                    <InfoTitle>{slider.title}</InfoTitle>
+                    <InfoContents>{slider.contents}</InfoContents>
+                    <Divider />
+                    <InfoDirectBtn>
+                      <Label>바로가기 </Label>
+                      <span>
+                        <img src={nextBtn} />
+                      </span>
+                    </InfoDirectBtn>
+                  </Information>
                 </SlideItem>
               );
             })}
           </SlidesContainer>
         </SlderTrack>
-        <TopBannerBtn onClick={() => ClickHandler("next")}>next</TopBannerBtn>
-        <TopBannerBtn onClick={() => ClickHandler("prev")}>prev</TopBannerBtn>
+        <TopBannerBtnNext onClick={() => ClickHandler("next")}>
+          <img src={nextBtn} />
+        </TopBannerBtnNext>
+        <TopBannerBtnPrev onClick={() => ClickHandler("prev")}>
+          <img src={prevBtn} />
+        </TopBannerBtnPrev>
       </TopBannerWrapper>
     </Main>
   );
 }
+const Information = styled.div`
+  position: absolute;
+  bottom: 28px;
+  width: 330px;
+  height: 160px;
+  border-radius: 4px;
+  background-color: #fff;
+  opacity: 0;
+  text-align: left;
+  left: 34px;
+  ${({ isActive }) => {
+    return isActive ? `opacity : 0` : `opacity:1`;
+  }};
+`;
+
+const InfoTitle = styled.h2`
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 700;
+  color: #333;
+  width: "auto";
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  line-height: 1.5;
+`;
+const InfoContents = styled.h3`
+  margin: 0 20px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 1.64;
+  color: #333;
+`;
+const Divider = styled.hr`
+  height: 1px;
+  margin: 0;
+  border: none;
+  flex-shrink: 0;
+  background-color: #ececec;
+  box-sizing: content-box;
+`;
+
+const InfoDirectBtn = styled.a`
+  margin: 6px 0 0 13px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #36f;
+  height: 40px;
+  display: inline-flex;
+`;
+
+const Label = styled.span`
+  display: inherit;
+  align-items: center;
+  justify-content: center;
+`;
+
 const SlidesContainer = styled.div`
   display: flex;
   width: 100%;
 `;
 const SlideItem = styled.div`
-  background-color: whitesmoke;
   position: relative;
   padding: 0 12px;
+  ${({ isActive }) => {
+    return isActive ? `filter:brightness(50%)` : `filter:brightness(100%)`;
+  }};
 `;
 const SlideImg = styled.img`
-  background-color: green;
   border-radius: 4px;
 `;
 const Main = styled.main`
@@ -107,15 +175,13 @@ const Main = styled.main`
 const TopBannerWrapper = styled.div`
   position: relative;
   overflow: hidden;
-  background-color: pink;
 `;
 
 const SlderTrack = styled.div`
   position: relative;
-  background-color: blanchedalmond;
 `;
 
-const TopBannerBtn = styled.div`
+const TopBannerBtnNext = styled.div`
   display: flex;
   background-color: #fff;
   border-radius: 15px;
@@ -127,5 +193,21 @@ const TopBannerBtn = styled.div`
   height: 60px;
   opacity: 0.5;
   cursor: pointer;
+  right: calc((100% - 1200px) / 2);
+`;
+
+const TopBannerBtnPrev = styled.div`
+  display: flex;
+  background-color: #fff;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 143px;
+  width: 30px;
+  height: 60px;
+  opacity: 0.5;
+  cursor: pointer;
+  left: calc((100% - 1200px) / 2);
 `;
 export default TopBanner;
