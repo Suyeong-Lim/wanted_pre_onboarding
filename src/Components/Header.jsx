@@ -42,10 +42,10 @@ const NavBar = styled.nav`
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.tabletM} {
     height: 60px;
     width: 100%;
-    padding: 15px 20px;
+    margin-bottom: 20px;
   }
 `;
 
