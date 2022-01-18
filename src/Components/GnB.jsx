@@ -24,6 +24,9 @@ const Menu = styled.ul`
   display: flex;
   flex: 1;
   justify-content: space-evenly;
+  @media ${(props) => props.theme.mobile} {
+    text-align: left;
+  }
 `;
 
 export default GnB;

@@ -43,6 +43,9 @@ const AsideWrapper = styled.aside`
   display: flex;
   align-items: center;
   margin-left: 50px;
+  @media ${(props) => props.theme.mobile} {
+    display: none;
+  }
 `;
 
 const AsideUl = styled.ul`

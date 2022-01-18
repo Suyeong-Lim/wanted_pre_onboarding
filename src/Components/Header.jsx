@@ -42,6 +42,11 @@ const NavBar = styled.nav`
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
+  @media ${(props) => props.theme.mobile} {
+    height: 60px;
+    width: 100%;
+    padding: 15px 20px;
+  }
 `;
 
 export default Header;

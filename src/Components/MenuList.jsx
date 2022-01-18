@@ -1,10 +1,17 @@
 import { MenuListData } from "./data/MenuListData";
 import React from "react";
 import styled from "styled-components";
+import menuStyle from "../styles/menuStyle.css";
 
 const MenuList = () => {
   return (
     <MenuListWrapper>
+      <div className="ResponsiveMenu">
+        <a className="MenuALink">홈</a>
+        <a className="MenuALink">채용</a>
+        <a className="MenuALink">이벤트</a>
+      </div>
+
       {MenuListData.map((menu) => (
         <MenuALink key={menu.id}>{menu.name}</MenuALink>
       ))}
@@ -25,6 +32,9 @@ const MenuALink = styled.a`
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
+  @media ${(props) => props.theme.tabletM} {
+    display: none;
+  }
 `;
 
 export default MenuList;

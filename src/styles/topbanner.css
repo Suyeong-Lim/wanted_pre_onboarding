@@ -1,0 +1,97 @@
+.InfoTitle {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 3px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.InfoContents {
+  margin: 0 20px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 1.64;
+  color: #333;
+}
+.Divider {
+  height: 1px;
+  margin: 0;
+  border: none;
+  flex-shrink: 0;
+  background-color: #ececec;
+  box-sizing: content-box;
+}
+
+.InfoDirectBtn {
+  margin: 6px 0 0 13px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #36f;
+  height: 40px;
+  display: inline-flex;
+  padding: 6px 8px;
+}
+
+.Label {
+  display: inherit;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.LabelBtn {
+  display: flex;
+  width: 17px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  color: inherit;
+}
+
+.SlidesContainer {
+  display: flex;
+  width: 100%;
+}
+
+.SlideImg {
+  border-radius: 4px;
+}
+.Main {
+  padding-top: 25px;
+}
+
+.TopBannerWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.SlderTrack {
+  position: relative;
+}
+
+.TopBannerBtn {
+  display: flex;
+  background-color: #fff;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 143px;
+  width: 30px;
+  height: 60px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.next {
+  right: calc((100% - 1200px) / 2);
+}
+
+.prev {
+  left: calc((100% - 1200px) / 2);
+}

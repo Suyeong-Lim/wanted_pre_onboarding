@@ -1,0 +1,47 @@
+@media screen and (max-width: 1199px) {
+  .Main {
+    padding-top: 0;
+  }
+  .TopBannerBtn {
+    display: none;
+  }
+  .TopBannerWrapper {
+    margin: 21px 12px;
+    padding: 0 20px;
+  }
+  .SlideImg {
+    width: 100%;
+    height: 183px;
+    object-fit: cover;
+  }
+  .InfoTitle {
+    font-size: 18px;
+    line-height: 1;
+    margin: 0;
+    margin-top: 20px;
+  }
+  .InfoContents {
+    height: fit-content;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: #666;
+    margin: 0;
+    margin-top: 6px;
+  }
+  .Divider {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .TopBannerWrapper {
+    margin: 21px 12px;
+    padding: 0 20px;
+  }
+  .SlideImg {
+    width: 100%;
+    height: 183px;
+    object-fit: cover;
+  }
+}
