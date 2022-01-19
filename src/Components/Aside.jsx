@@ -46,6 +46,9 @@ const AsideWrapper = styled.aside`
   @media ${(props) => props.theme.mobile} {
     display: none;
   }
+  @media ${(props) => props.theme.mobileM} {
+    display: none;
+  }
 `;
 
 const AsideUl = styled.ul`

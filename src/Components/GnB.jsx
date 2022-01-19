@@ -18,6 +18,8 @@ const GnBConainer = styled.div`
   text-align: center;
   display: flex;
   justify-content: space-evenly;
+  @media ${(props) => props.theme.mobileM} {
+  }
   @media ${(props) => props.theme.mobile} {
     position: relative;
     top: -13px;

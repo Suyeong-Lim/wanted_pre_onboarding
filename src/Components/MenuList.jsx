@@ -34,6 +34,8 @@ const MenuALink = styled.a`
   font-weight: 500;
   @media ${(props) => props.theme.tabletM} {
     display: none;
+    text-align: left;
+    padding: 11px 10px 19px;
   }
 `;
 
