@@ -7,6 +7,9 @@ function Padding() {
 
 const PaddingDiv = styled.div`
   height: 50px;
+  @media ${(props) => props.theme.mobileM} {
+    height: 110px;
+  }
 `;
 
 export default Padding;

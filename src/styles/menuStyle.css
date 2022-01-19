@@ -19,3 +19,15 @@
     font-weight: 500;
   }
 }
+@media screen and (max-width: 767px) {
+  .Home {
+    box-shadow: inset 0 -2px #258bf7;
+  }
+  .MenuALink {
+    text-align: left;
+    padding: 11px 10px 19px;
+  }
+  .ResponsiveMenu {
+    text-align: left;
+  }
+}

@@ -7,7 +7,7 @@ const MenuList = () => {
   return (
     <MenuListWrapper>
       <div className="ResponsiveMenu">
-        <a className="MenuALink">홈</a>
+        <a className="MenuALink Home">홈</a>
         <a className="MenuALink">채용</a>
         <a className="MenuALink">이벤트</a>
       </div>

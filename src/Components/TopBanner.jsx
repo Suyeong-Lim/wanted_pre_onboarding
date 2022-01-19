@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import styled from "styled-components";
 import { CarouselData } from "./data/CarouselData";
 import nextBtn from "../img/nextBtn.svg";
@@ -14,14 +19,32 @@ function TopBanner() {
   const carouselcount = stateCarousel.length; //데이터 개수
 
   const [current, setCurrent] = useState(1);
+  const [windowInnerWidth, setWindowInnerWidth] = useState(
+    window.innerWidth || document.body.clientWidth
+  );
 
-  const windowWidth = window.innerWidth || document.body.clientWidth;
-  const cardWidth = 1060 + 24; //(width + margin)
-  const leftMargin = (windowWidth - cardWidth) / 2;
+  const cardWidth =
+    (windowInnerWidth > 1200 ? 1060 : windowInnerWidth - 100) + 24; //(width + margin)
+
+  const width = carouselcount * cardWidth; // 13*1200
+  const leftMargin =
+    windowInnerWidth >= 1200 ? (windowInnerWidth - cardWidth) / 2 : 24;
 
   const translateX = cardWidth * current - leftMargin;
 
   const [active, setActive] = useState(false);
+
+  //윈도우 리사이징
+  useLayoutEffect(() => {
+    setWindowInnerWidth(window.innerWidth);
+  }, [window.innerWidth]);
+
+  useLayoutEffect(() => {
+    const responsive = (windowInnerWidth) => {
+      setWindowInnerWidth(windowInnerWidth);
+    };
+    window.addEventListener("resize", (e) => responsive(e.target.innerWidth));
+  }, [window.innerWidth]);
 
   //앞,뒤 캐러셀이미지 복사
   useEffect(() => {
@@ -58,12 +81,12 @@ function TopBanner() {
         <div
           className="SlderTrack"
           style={{
-            width: "42009px",
+            width: `${width}px`,
             transform: `translateX(${-translateX}px)`,
             transition:
               current == 1 || current >= carouselcount - 2
                 ? "none"
-                : "500ms all ease-in-out",
+                : "350ms all ease-in-out",
           }}
         >
           <div className="SlidesContainer">

@@ -34,6 +34,9 @@ const HeaderInner = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  @media ${(props) => props.theme.mobileM} {
+    height: 110px;
+  }
 `;
 
 const NavBar = styled.nav`
@@ -42,10 +45,10 @@ const NavBar = styled.nav`
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
-  @media ${(props) => props.theme.tabletM} {
+  @media ${(props) => props.theme.mobileM} {
     height: 60px;
     width: 100%;
-    margin-bottom: 20px;
+    padding: 15px 20px;
   }
 `;
 

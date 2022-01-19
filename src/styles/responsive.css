@@ -5,9 +5,10 @@
   .TopBannerBtn {
     display: none;
   }
-  .TopBannerWrapper {
+  .TopBannerWrapper .SliderTrack .SlidesContainer {
     margin: 21px 12px;
     padding: 0 20px;
+    width: calc(100vw-100px);
   }
   .SlideImg {
     width: 100%;
